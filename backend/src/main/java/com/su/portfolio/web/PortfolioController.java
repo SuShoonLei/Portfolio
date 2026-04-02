@@ -27,17 +27,26 @@ public class PortfolioController {
             "allProjectsUrl", "https://github.com/SuShoonLei?tab=repositories",
             "linksByTitle",
             Map.of(
-                "3D Hackathon Game",
-                List.of(Map.of("label", "⭐ GitHub", "cls", "pl-gh", "href", "https://github.com/SuShoonLei")),
-                "AI-Powered Web App",
+                "SocketBench",
                 List.of(
-                    Map.of("label", "⭐ GitHub", "cls", "pl-gh", "href", "https://github.com/SuShoonLei"),
-                    Map.of("label", "🚀 Demo", "cls", "pl-live", "href", "https://github.com/SuShoonLei")),
-                "Full-Stack Web Project",
+                    Map.of("label", "⭐ GitHub", "cls", "pl-gh", "href", "https://github.com/SuShoonLei/SocketBench")),
+                "Sudoku Game (API + Swing)",
                 List.of(
-                    Map.of("label", "⭐ GitHub", "cls", "pl-gh", "href", "https://github.com/SuShoonLei"),
-                    Map.of("label", "🚀 Demo", "cls", "pl-live", "href", "https://github.com/SuShoonLei")),
-                "Cybersecurity / Systems Project",
-                List.of(Map.of("label", "⭐ GitHub", "cls", "pl-gh", "href", "https://github.com/SuShoonLei")))));
+                    Map.of(
+                        "label",
+                        "⭐ GitHub",
+                        "cls",
+                        "pl-gh",
+                        "href",
+                        "https://github.com/SuShoonLei/two--player-game-puzzle-using-parallel-move-evaluation")),
+                "Factory Layout Optimizer (GA)",
+                List.of(
+                    Map.of(
+                        "label",
+                        "⭐ GitHub",
+                        "cls",
+                        "pl-gh",
+                        "href",
+                        "https://github.com/SuShoonLei/GeneticAlgorithm")))));
   }
 }
