@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import DecryptedText from "./DecryptedText.jsx";
 
 const ACCENT = "#b48fe0";
 const ACCENT2 = "#c96b8a";
@@ -72,9 +73,14 @@ const css = `
   .hero-greeting { font-family:'JetBrains Mono',monospace; font-size:.9rem; color:var(--accent3); margin-bottom:.5rem; animation:fadeUp .7s .1s ease both; text-transform:uppercase; letter-spacing:.08em; }
   .hero-name { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.6rem,4.5vw,4.4rem); line-height:1.08; color:var(--text); margin-bottom:.3rem; animation:fadeUp .7s .15s ease both; }
   .hero-name em { font-style:normal; background:linear-gradient(135deg,var(--accent2),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .hero-tagline { font-family:'JetBrains Mono',monospace; font-size:.86rem; color:var(--accent); letter-spacing:.04em; margin-bottom:1.4rem; animation:fadeUp .7s .22s ease both; min-height:1.4em; }
-  .tw-cursor { display:inline-block; width:2px; height:.9em; background:var(--accent); margin-left:1px; animation:blink 1s step-end infinite; vertical-align:middle; }
-  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
+  .hero-tagline { font-family:'JetBrains Mono',monospace; font-size:.86rem; color:var(--accent); letter-spacing:.04em; margin-bottom:1.4rem; animation:fadeUp .7s .22s ease both; min-height:1.35em; }
+  .hero-dt-wrap { display:inline !important; }
+  .hero-dt-rev { color:var(--accent); }
+  .hero-dt-enc { color:var(--text3); opacity:.72; }
+  .sec-title-accent-inline { display:inline; }
+  .sec-title-dt-wrap { display:inline !important; }
+  .sec-title-dt-rev { font-style:normal; background:linear-gradient(135deg,var(--accent2),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .sec-title-dt-enc { color:var(--text3); opacity:.88; }
   .hero-bio { font-size:.95rem; line-height:1.9; color:var(--text2); max-width:500px; margin-bottom:1.6rem; animation:fadeUp .7s .3s ease both; }
   .hero-bio strong { color:var(--text); }
   .code-snippet { background:#0a0f1f; border-radius:12px; padding:1.1rem 1.4rem; font-family:'JetBrains Mono',monospace; font-size:.73rem; line-height:1.85; color:#cbd5e1; margin-bottom:2rem; border:1px solid var(--border); position:relative; animation:fadeUp .7s .38s ease both; }
@@ -265,6 +271,50 @@ const PHRASES = [
   "Building cool things, one commit at a time 💜",
 ];
 
+const DT_SECTION = {
+  animateOn: "view",
+  sequential: true,
+  revealDirection: "start",
+  speed: 30,
+  className: "sec-title-dt-rev",
+  encryptedClassName: "sec-title-dt-enc",
+  parentClassName: "sec-title-dt-wrap",
+};
+
+function SectionTitleDecrypt({ prefix, accent }) {
+  return (
+    <h2 className="sec-title">
+      {prefix}{" "}
+      <span className="sec-title-accent-inline">
+        <DecryptedText text={accent} {...DT_SECTION} />
+      </span>
+    </h2>
+  );
+}
+
+function HeroDecryptTagline() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI(x => (x + 1) % PHRASES.length), 5400);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <p className="hero-tagline">
+      <DecryptedText
+        key={i}
+        text={PHRASES[i]}
+        animateOn="view"
+        sequential
+        revealDirection="start"
+        speed={28}
+        className="hero-dt-rev"
+        encryptedClassName="hero-dt-enc"
+        parentClassName="hero-dt-wrap"
+      />
+    </p>
+  );
+}
+
 const DEFAULT_CONFIG = {
   links: {
     linkedin: "https://www.linkedin.com/in/su-shoon-lei-khaing-k280825",
@@ -352,44 +402,9 @@ function BgCanvas() {
   return <canvas ref={ref} style={{ position:"fixed", inset:0, pointerEvents:"none", zIndex:0 }} />;
 }
 
-function Typewriter() {
-  const [text, setText] = useState("");
-  const state = useRef({ pi: 0, ci: 0, del: false });
-  useEffect(() => {
-    let timeout;
-    function loop() {
-      const { pi, ci, del } = state.current;
-      const w = PHRASES[pi];
-      if (!del) {
-        const next = ci + 1;
-        setText(w.slice(0, next));
-        if (next === w.length) {
-          state.current = { pi, ci: next, del: true };
-          timeout = setTimeout(loop, 1900);
-        } else {
-          state.current = { pi, ci: next, del: false };
-          timeout = setTimeout(loop, 72 + Math.random() * 42);
-        }
-      } else {
-        const next = ci - 1;
-        setText(w.slice(0, next));
-        if (next === 0) {
-          state.current = { pi: (pi + 1) % PHRASES.length, ci: 0, del: false };
-          timeout = setTimeout(loop, 300);
-        } else {
-          state.current = { pi, ci: next, del: true };
-          timeout = setTimeout(loop, 40);
-        }
-      }
-    }
-    timeout = setTimeout(loop, 400);
-    return () => clearTimeout(timeout);
-  }, []);
-  return <span>{text}<span className="tw-cursor" /></span>;
-}
-
 function FlipCard() {
   const [flipped, setFlipped] = useState(false);
+  const backPhoto = `${import.meta.env.BASE_URL}profile-back.png`;
   return (
     <div style={{ position: "relative" }}>
       <div className={`card-scene ${flipped ? "flipped" : ""}`} onClick={() => setFlipped(f => !f)}>
@@ -397,15 +412,15 @@ function FlipCard() {
           <div className="card-face card-front">
             <img
               src="https://github.com/SuShoonLei.png"
-              alt="Su Shoon Lei Khaing"
+              alt="Su Shoon Lei Khaing — profile"
               onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
             />
             <div className="card-face-placeholder" style={{ display: "none" }}>👩‍💻</div>
           </div>
           <div className="card-face card-back">
             <img
-              src="https://github.com/SuShoonLei.png"
-              alt="Su Shoon Lei Khaing — back"
+              src={backPhoto}
+              alt="Su Shoon Lei Khaing — portrait outdoors"
               onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
             />
             <div className="card-face-placeholder" style={{ display: "none" }}>✨</div>
@@ -428,7 +443,7 @@ function Hero({ links }) {
         <div className="pronouns-badge"><span>✦</span> she / her</div>
         <p className="hero-greeting">👋 Hi, I&apos;m</p>
         <h1 className="hero-name">Su Shoon Lei<br /><em>Khaing</em></h1>
-        <p className="hero-tagline"><Typewriter /></p>
+        <HeroDecryptTagline />
         <p className="hero-bio">
           A graduating CS senior at <strong>SUNY Oswego</strong> with a love for building things at the intersection of <em>creativity and code</em>. Whether it&apos;s a game, web app, AI tool, or handmade craft, I put the same passion into everything I create.
         </p>
@@ -458,7 +473,7 @@ function Skills() {
   return (
     <section id="skills">
       <div className="sec-label">What I work with</div>
-      <h2 className="sec-title">Tech <em>Stack</em></h2>
+      <SectionTitleDecrypt prefix="Tech" accent="Stack" />
       <div className="sec-divider" />
       <div className="skills-grid">
         {SKILLS.map(({ icon, title, tags }) => (
@@ -479,19 +494,37 @@ function Experience() {
   return (
     <section id="experience">
       <div className="sec-label">Where I've been</div>
-      <h2 className="sec-title">Work <em>Experience</em></h2>
+      <SectionTitleDecrypt prefix="Work" accent="Experience" />
       <div className="sec-divider" />
       <div className="timeline">
+        <div className="timeline-item">
+          <div className="tl-dot" />
+          <div className="tl-date">Aug 2024 · Move-in season · On-campus</div>
+          <div className="tl-role">Laker Move-In Captain</div>
+          <div className="tl-org">Hart Hall &amp; Riggs Hall · Residential Life · SUNY Oswego</div>
+          <p className="tl-desc">
+            Team captain for two residence halls during new-student arrival: set the tone for a welcoming move-in, keep volunteers organized under busy timelines, and coordinate roles across the building.
+          </p>
+          <ul className="tl-bullets">
+            <li>Greeted students and families and helped create a calm, positive first impression for both hall communities</li>
+            <li>Led volunteer teams with clear role assignments, check-ins, and on-the-spot adjustments during peak traffic</li>
+            <li>Balanced competing priorities with strong time management—keeping lines, elevators, and floor flow moving smoothly</li>
+            <li>Partnered with hall staff to align expectations, solve issues quickly, and support a coordinated building-wide effort</li>
+          </ul>
+          <div className="tl-tags">
+            {[["Leadership","tg"],["Team Management","ti"],["Time Management","tc"],["Communication","tv"],["Event Operations","tp"],["Customer Service","ty"]].map(([l,c])=><Tag key={l} label={l} cls={c}/>)}
+          </div>
+        </div>
         <div className="timeline-item">
           <div className="tl-dot" />
           <div className="tl-date">May 2024 — Present · Part-time · On-site</div>
           <div className="tl-role">Student Ambassador</div>
           <div className="tl-org">ISSS Office (International Student &amp; Scholar Services) · SUNY Oswego</div>
-          <p className="tl-desc">Serve as a welcoming face and cultural bridge for international students and visitors at SUNY Oswego. Responsibilities span campus tours, student move-in leadership, and ongoing community engagement.</p>
+          <p className="tl-desc">Serve as a welcoming face and cultural bridge for international students and visitors at SUNY Oswego. Campus tours, orientation support, and ongoing community engagement.</p>
           <ul className="tl-bullets">
-            <li>Guide tour groups from foreign countries visiting campus — leading immersive, culturally-aware campus experiences that help international visitors feel welcomed and informed</li>
-            <li>Served as <strong style={{ color: "var(--text)" }}>Laker Move-In Captain</strong> for Hart Hall and Riggs Hall — leading a team of volunteers to welcome and assist new students moving into the residence halls</li>
-            <li>Build cross-cultural connections and provide ongoing support to international students navigating campus resources and life in the US</li>
+            <li>Guide tour groups from foreign countries visiting campus — immersive, culturally aware experiences that help visitors feel informed and welcomed</li>
+            <li>Support high-traffic student events alongside Residential Life and campus partners during key arrival periods</li>
+            <li>Build cross-cultural connections and help international students navigate campus resources and life in the US</li>
           </ul>
           <div className="tl-tags">
             {[["Leadership","tg"],["Communication","tc"],["Community Engagement","tp"],["Cross-Cultural Relations","tv"],["Customer Service","ty"],["Team Management","ti"]].map(([l,c])=><Tag key={l} label={l} cls={c}/>)}
@@ -516,7 +549,12 @@ function Certifications({ credentialUrl }) {
   return (
     <section id="certifications">
       <div className="sec-label">Always learning</div>
-      <h2 className="sec-title">Licenses &amp; <em>Certifications</em></h2>
+      <h2 className="sec-title">
+        Licenses &amp;{" "}
+        <span className="sec-title-accent-inline">
+          <DecryptedText text="Certifications" {...DT_SECTION} />
+        </span>
+      </h2>
       <div className="sec-divider" />
       <div className="certs-grid">
         {CERTS.map(({ logo, name, issuer, date, tags }) => (
@@ -542,7 +580,7 @@ function Projects({ allProjectsUrl, linksByTitle }) {
   return (
     <section id="projects">
       <div className="sec-label">Things I've built</div>
-      <h2 className="sec-title">Featured <em>Projects</em></h2>
+      <SectionTitleDecrypt prefix="Featured" accent="Projects" />
       <div className="sec-divider" />
       <div className="projects-grid">
         {PROJECTS.map(({ banner, bannerBg, hackathon, title, desc, tags, links }) => (
@@ -578,7 +616,7 @@ function Now() {
   return (
     <section id="now">
       <div className="sec-label">Right now</div>
-      <h2 className="sec-title">Currently <em>Up To</em></h2>
+      <SectionTitleDecrypt prefix="Currently" accent="Up To" />
       <div className="sec-divider" />
       <div className="now-grid">
         <div className="now-card reveal">
@@ -613,7 +651,12 @@ function Contact({ links }) {
   return (
     <section id="contact">
       <div className="sec-label">Say hello ✉️</div>
-      <h2 className="sec-title">Let's <em>Connect</em></h2>
+      <h2 className="sec-title">
+        Let&apos;s{" "}
+        <span className="sec-title-accent-inline">
+          <DecryptedText text="Connect" {...DT_SECTION} />
+        </span>
+      </h2>
       <div className="sec-divider" style={{ margin: "0 auto 2.8rem" }} />
       <p className="contact-sub">Whether it's a project collab, an internship opportunity, or just a friendly hello — I'd love to hear from you! ✨</p>
       <div className="contact-grid">
