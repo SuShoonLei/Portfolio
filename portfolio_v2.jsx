@@ -275,7 +275,7 @@ const DT_SECTION = {
   animateOn: "view",
   sequential: true,
   revealDirection: "start",
-  speed: 30,
+  speed: 60,
   className: "sec-title-dt-rev",
   encryptedClassName: "sec-title-dt-enc",
   parentClassName: "sec-title-dt-wrap",
@@ -295,7 +295,7 @@ function SectionTitleDecrypt({ prefix, accent }) {
 function HeroDecryptTagline() {
   const [i, setI] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setI(x => (x + 1) % PHRASES.length), 5400);
+    const id = setInterval(() => setI(x => (x + 1) % PHRASES.length), 10800);
     return () => clearInterval(id);
   }, []);
   return (
@@ -306,7 +306,7 @@ function HeroDecryptTagline() {
         animateOn="view"
         sequential
         revealDirection="start"
-        speed={28}
+        speed={56}
         className="hero-dt-rev"
         encryptedClassName="hero-dt-enc"
         parentClassName="hero-dt-wrap"
