@@ -193,7 +193,7 @@ const css = `
 
   /* Skills */
   #skills { background:var(--bg); }
-  .morph-skills-wrap { max-width:720px; margin:0 auto 2.6rem; }
+  .morph-skills-wrap { max-width:min(920px,100%); margin:0 auto 2.2rem; }
   .morph-root { display:flex; flex-direction:column; gap:1rem; align-items:center; }
   .morph-toggle-bar { display:flex; align-items:center; justify-content:center; gap:.25rem; padding:.35rem; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid var(--border); width:fit-content; margin:0 auto; }
   .morph-toggle-btn { display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; border-radius:8px; padding:.45rem .55rem; color:var(--text3); background:transparent; transition:color .2s, background .2s; }
@@ -202,8 +202,8 @@ const css = `
   .morph-toggle-icon { width:18px; height:18px; }
   .morph-container { position:relative; margin:0 auto; }
   .morph-container--stack { width:16.5rem; height:15rem; }
-  .morph-container--grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; width:100%; max-width:440px; min-height:14rem; }
-  .morph-container--list { display:flex; flex-direction:column; gap:.75rem; width:100%; max-width:480px; min-height:auto; }
+  .morph-container--grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; width:100%; max-width:560px; min-height:14rem; }
+  .morph-container--list { display:flex; flex-direction:column; gap:.75rem; width:100%; max-width:100%; min-height:auto; }
   .morph-card { cursor:pointer; border-radius:14px; border:1px solid var(--border); background:var(--bg2); padding:1rem 1.1rem; box-shadow:0 4px 18px rgba(0,0,0,.25); transition:border-color .25s, box-shadow .25s; text-align:left; }
   .morph-card:hover { border-color:rgba(139,92,246,.45); }
   .morph-card--stack { position:absolute; width:13.5rem; min-height:11.5rem; }
@@ -217,22 +217,14 @@ const css = `
   .morph-card-text { min-width:0; flex:1; }
   .morph-card-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:600; color:var(--text); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .morph-card-desc { margin:.35rem 0 0; font-size:.78rem; line-height:1.45; color:var(--text2); }
-  .morph-card-desc--stack { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .morph-card-desc--stack { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
   .morph-card-desc--grid { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-  .morph-card-desc--list { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .morph-card-desc--list { display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
   .morph-swipe-hint { position:absolute; bottom:.35rem; left:0; right:0; text-align:center; font-size:.62rem; letter-spacing:.06em; color:var(--text3); opacity:.55; pointer-events:none; font-family:'JetBrains Mono',monospace; text-transform:uppercase; }
   .morph-dots { display:flex; justify-content:center; gap:.4rem; padding-top:.15rem; }
   .morph-dot { width:6px; height:6px; border-radius:999px; border:none; padding:0; cursor:pointer; background:rgba(148,163,184,.35); transition:all .25s; }
   .morph-dot:hover { background:rgba(148,163,184,.55); }
   .morph-dot--active { width:1.1rem; background:var(--accent); }
-  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr)); gap:1.3rem; }
-  .skill-card { background:var(--bg2); border-radius:18px; padding:1.6rem; border:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.3); opacity:0; transform:translateY(32px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),box-shadow .3s; }
-  .skill-card.visible { opacity:1; transform:none; }
-  .skill-card:hover { transform:translateY(-6px) !important; box-shadow:0 12px 36px rgba(0,0,0,.45),0 0 0 1px var(--border-accent); }
-  .skill-card:hover .skill-icon { animation:wiggle .5s ease; }
-  @keyframes wiggle { 0%,100%{transform:rotate(0);}25%{transform:rotate(-12deg);}75%{transform:rotate(12deg);} }
-  .skill-icon { font-size:1.8rem; margin-bottom:.7rem; display:inline-block; }
-  .skill-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1rem; color:var(--text); margin-bottom:.7rem; }
 
   /* Experience */
   #experience { background:var(--bg2); }
@@ -385,7 +377,7 @@ const css = `
   }
   @media(max-width:600px) {
     .nav-links { display:none; }
-    .projects-grid,.skills-grid,.certs-grid { grid-template-columns:1fr; }
+    .projects-grid,.certs-grid { grid-template-columns:1fr; }
   }
 `;
 
@@ -516,10 +508,9 @@ function useScrollReveal() {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
     }, { threshold: 0.1 });
     const els = document.querySelectorAll(
-      ".skill-card, .project-card, .timeline-item, .cert-card, .reveal, .reveal-scale"
+      ".project-card, .timeline-item, .cert-card, .reveal, .reveal-scale"
     );
     els.forEach((el, i) => {
-      if (el.classList.contains("skill-card")) el.style.transitionDelay = (i % 6) * 0.07 + "s";
       if (el.classList.contains("project-card")) el.style.transitionDelay = (i % 4) * 0.1 + "s";
       if (el.classList.contains("timeline-item")) el.style.transitionDelay = (i % 5) * 0.14 + "s";
       if (el.classList.contains("cert-card")) el.style.transitionDelay = (i % 4) * 0.09 + "s";
@@ -673,17 +664,6 @@ function Skills() {
       <div className="sec-divider" />
       <div className="morph-skills-wrap">
         <MorphingCardStack cards={skillsToMorphCards(SKILLS)} defaultLayout="stack" />
-      </div>
-      <div className="skills-grid">
-        {SKILLS.map(({ icon, title, tags }) => (
-          <div className="skill-card" key={title}>
-            <div className="skill-icon">{icon}</div>
-            <h3>{title}</h3>
-            <div className="tags">
-              {tags.map(([label, cls]) => <Tag key={label} label={label} cls={cls} />)}
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );
