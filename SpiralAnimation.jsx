@@ -131,8 +131,7 @@ class AnimationController {
   render() {
     const ctx = this.ctx;
     if (!ctx) return;
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, this.size, this.size);
+    ctx.clearRect(0, 0, this.size, this.size);
     ctx.save();
     ctx.translate(this.size / 2, this.size / 2);
 
