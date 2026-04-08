@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import DecryptedText from "./DecryptedText.jsx";
-import profileBackUrl from "./assets/profile-back.png";
+import profileBackUrl from "./assets/profile-back.png?url";
 
 const ACCENT = "#b48fe0";
 const ACCENT2 = "#c96b8a";
@@ -135,17 +135,18 @@ const css = `
 
   /* Flip card */
   .hero-visual { position:relative; z-index:2; display:flex; justify-content:center; align-items:center; animation:fadeUp .7s .2s ease both; }
-  .card-scene { width:300px; height:380px; perspective:1000px; cursor:pointer; }
-  .card-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.4,0,.2,1); transform:rotate(-4deg) rotateY(0deg); filter:drop-shadow(0 30px 50px rgba(0,0,0,.7)); }
+  /* No filter on .card-inner — drop-shadow flattens preserve-3d and both faces show the same image */
+  .card-scene { width:300px; height:380px; perspective:1000px; cursor:pointer; border-radius:22px; box-shadow:0 28px 55px rgba(0,0,0,.72); }
+  .card-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.4,0,.2,1); transform:rotate(-4deg) rotateY(0deg); }
   .card-scene:hover .card-inner { transform:rotate(-1deg) rotateY(0deg) scale(1.03); }
   .card-scene.flipped .card-inner { transform:rotate(2deg) rotateY(180deg); }
   .card-scene.flipped:hover .card-inner { transform:rotate(2deg) rotateY(180deg) scale(1.03); }
   .card-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.09); }
   .card-face img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
   .card-face-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; background:#1a1a1c; }
-  .card-front { background:#1a1a1c; transform:rotateY(0deg) translateZ(1px); }
+  .card-front { background:#1a1a1c; transform:rotateY(0deg) translateZ(2px); }
   .card-front::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.35) 0%,transparent 30%,transparent 65%,rgba(0,0,0,.55) 100%),linear-gradient(to right,rgba(0,0,0,.2) 0%,transparent 20%,transparent 80%,rgba(0,0,0,.2) 100%); border-radius:20px; pointer-events:none; }
-  .card-back { transform:rotateY(180deg) translateZ(1px); background:#1a1a1c; }
+  .card-back { transform:rotateY(180deg) translateZ(2px); background:#1a1a1c; }
   .card-back::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 25%,transparent 65%,rgba(0,0,0,.5) 100%); border-radius:20px; pointer-events:none; }
   .flip-hint { position:absolute; bottom:-2.2rem; left:50%; transform:translateX(-50%); font-size:.68rem; color:var(--text3); letter-spacing:.1em; text-transform:uppercase; font-family:'JetBrains Mono',monospace; white-space:nowrap; transition:color .3s; }
   .card-scene:hover .flip-hint { color:var(--accent); }
@@ -512,16 +513,20 @@ function FlipCard() {
         <div className="card-inner">
           <div className="card-face card-front">
             <img
+              key="front-avatar"
               src="https://github.com/SuShoonLei.png"
               alt="Su Shoon Lei Khaing — profile"
+              draggable={false}
               onError={e => showCardPlaceholder(e.target)}
             />
             <div className="card-face-placeholder" style={{ display: "none" }}>👩‍💻</div>
           </div>
           <div className="card-face card-back">
             <img
+              key="back-portrait"
               src={profileBackUrl}
               alt="Su Shoon Lei Khaing — portrait outdoors"
+              draggable={false}
               onError={e => showCardPlaceholder(e.target)}
             />
             <div className="card-face-placeholder" style={{ display: "none" }}>✨</div>
