@@ -40,9 +40,11 @@ const css = `
   .noise-overlay { position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:9999; }
 
   /* Back to top */
-  #back-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:transparent; color:rgba(255,255,255,.85); border:1px solid rgba(148,163,184,.4); font-size:1rem; font-weight:200; box-shadow:none; opacity:0; transform:translateY(10px); transition:opacity .3s,transform .3s,letter-spacing .35s,border-color .35s,color .35s; z-index:400; cursor:pointer; animation: btnPulseSoft 3s ease-in-out infinite; }
+  #back-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:transparent; color:rgba(255,255,255,.85); border:1px solid rgba(148,163,184,.4); font-size:1rem; font-weight:200; box-shadow:none; opacity:0; transform:translateY(10px); transition:opacity .3s,transform .3s,letter-spacing .35s,border-color .35s,color .35s; z-index:400; cursor:pointer; }
   #back-top.visible { opacity:1; transform:translateY(0); }
+  #back-top.visible .spiral-wrap__content { animation: btnPulseSoft 3s ease-in-out infinite; }
   #back-top:hover { transform:translateY(-2px); background:transparent; color:#fff; border-color:rgba(139,92,246,.55); }
+  #back-top:hover .spiral-wrap__content { animation: none; opacity: 1; }
   /* GSAP spiral backdrop on hover (compact canvas behind control) */
   .spiral-wrap { position:relative; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; }
   .spiral-wrap__canvas { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:0; opacity:.88; mix-blend-mode:screen; }
@@ -118,14 +120,22 @@ const css = `
     background: transparent;
     color: rgba(255, 255, 255, 0.92);
     transition: letter-spacing 0.7s ease, color 0.35s ease, opacity 0.35s ease;
-    animation: btnPulseSoft 2.6s ease-in-out infinite;
     box-shadow: none;
+  }
+  /* Pulse/dim only the label — animating opacity on the whole <a> breaks canvas + mix-blend-mode (black slab) */
+  .spiral-wrap.btn-primary .spiral-wrap__content,
+  .spiral-wrap.btn-outline .spiral-wrap__content {
+    animation: btnPulseSoft 2.6s ease-in-out infinite;
   }
   .btn-primary:hover, .btn-outline:hover {
     letter-spacing: 0.32em;
     color: #fff;
-    opacity: 1;
     transform: none;
+  }
+  .btn-primary:hover .spiral-wrap__content,
+  .btn-outline:hover .spiral-wrap__content {
+    opacity: 1;
+    animation: none;
   }
   .btn-primary {
     border-bottom: 1px solid rgba(139, 92, 246, 0.45);
@@ -135,9 +145,9 @@ const css = `
     border-bottom-color: rgba(236, 72, 153, 0.65);
   }
   .btn-outline {
-    opacity: 0.88;
     border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     padding-bottom: 0.55rem;
+    color: rgba(255, 255, 255, 0.81);
   }
   .btn-outline:hover {
     border-bottom-color: rgba(139, 92, 246, 0.55);
@@ -296,6 +306,8 @@ const css = `
     border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     border-radius: 0;
     transition: letter-spacing 0.7s ease, color 0.35s ease, border-color 0.35s ease, opacity 0.35s ease;
+  }
+  .spiral-wrap.cl .spiral-wrap__content {
     animation: btnPulseSoft 2.8s ease-in-out infinite;
   }
   .cl:hover {
@@ -305,7 +317,10 @@ const css = `
     transform: none;
     box-shadow: none;
     background: transparent;
+  }
+  .cl:hover .spiral-wrap__content {
     opacity: 1;
+    animation: none;
   }
   .cl svg { flex-shrink: 0; opacity: 0.75; }
   .cl:hover svg { opacity: 1; }
@@ -751,7 +766,7 @@ function Now() {
         <div className="now-card reveal">
           <h3>$ ls current_ops/</h3>
           <div className="terminal">
-            <span className="prompt">→ </span>🎮&nbsp; Building <strong style={{ color: "#d6bcfa" }}>GroupGame</strong> — Unity group project (C#) with classmates.{" "}
+            <span className="prompt">→ </span>🎮&nbsp; Building <strong style={{ color: "#d6bcfa" }}>Out You Run! 2D platformer</strong> — Unity group project (C#) with classmates.{" "}
             <SpiralHoverAnchor href="https://github.com/Min1322003/GroupGame" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
               GitHub ↗
             </SpiralHoverAnchor>
