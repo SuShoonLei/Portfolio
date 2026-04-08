@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import DecryptedText from "./DecryptedText.jsx";
 import profileBackUrl from "./assets/profile-back.png?url";
 import { SpiralHoverAnchor, SpiralHoverButton } from "./SpiralHoverWrap.jsx";
+import SkillOrbit from "./components/ui/SkillOrbit.jsx";
 
 const ACCENT = "#b48fe0";
 const ACCENT2 = "#c96b8a";
@@ -154,8 +155,17 @@ const css = `
   }
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
 
-  /* Flip card */
-  .hero-visual { position:relative; z-index:2; display:flex; justify-content:center; align-items:center; animation:fadeUp .7s .2s ease both; }
+  /* Flip card + orbiting skill icons (beside profile) */
+  .hero-visual { position:relative; z-index:2; animation:fadeUp .7s .2s ease both; }
+  .hero-visual-wrap { display:flex; flex-direction:row; align-items:center; justify-content:center; gap:.15rem .35rem; flex-wrap:nowrap; }
+  @keyframes skill-orbit-spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+  .skill-orbit-viewport { position:relative; width:clamp(150px,20vw,230px); height:min(400px,68vh); overflow:hidden; flex-shrink:0; pointer-events:none; }
+  .skill-orbit-shifted { position:absolute; left:58%; top:50%; width:32rem; height:32rem; transform:translate(-50%,-50%); }
+  .skill-orbit-hub { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:3.25rem; height:3.25rem; border-radius:50%; background:rgba(26,36,64,.92); border:1px solid rgba(148,163,184,.22); box-shadow:0 8px 28px rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; z-index:2; }
+  .skill-orbit-hub-icon { width:1.65rem; height:1.65rem; display:block; }
+  .skill-orbit-ring { position:absolute; left:50%; top:50%; border:2px dashed rgba(148,163,184,.28); border-radius:50%; pointer-events:none; }
+  .skill-orbit-node { position:absolute; width:2rem; height:2rem; transform:translate(-50%,-50%); border-radius:50%; background:rgba(16,23,42,.95); border:1px solid rgba(148,163,184,.22); box-shadow:0 4px 14px rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; }
+  .skill-orbit-node-icon { width:1.05rem; height:1.05rem; display:block; flex-shrink:0; }
   /* No filter on .card-inner — drop-shadow flattens preserve-3d and both faces show the same image */
   .card-scene { width:300px; height:380px; perspective:1000px; cursor:pointer; border-radius:22px; box-shadow:0 28px 55px rgba(0,0,0,.72); }
   .card-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform .75s cubic-bezier(.4,0,.2,1); transform:rotate(-4deg) rotateY(0deg); }
@@ -331,6 +341,9 @@ const css = `
     .hero-bio, .code-snippet { margin-left:auto; margin-right:auto; }
     .hero-btns { justify-content:center; }
     .hero-visual { margin-top:3rem; }
+    .hero-visual-wrap { flex-direction:column; gap:.75rem; }
+    .skill-orbit-viewport { width:min(100%,300px); height:160px; }
+    .skill-orbit-shifted { left:50%; width:26rem; height:26rem; transform:translate(-50%,-52%); }
     .fc1,.fc2,.fc3 { display:none; }
     .card-scene { width:240px; height:300px; }
     section { padding:4rem 1.8rem; }
@@ -601,7 +614,10 @@ function Hero({ links }) {
         </div>
       </div>
       <div className="hero-visual">
-        <FlipCard />
+        <div className="hero-visual-wrap">
+          <FlipCard />
+          <SkillOrbit />
+        </div>
       </div>
     </section>
   );
