@@ -3,6 +3,7 @@ import DecryptedText from "./DecryptedText.jsx";
 import profileBackUrl from "./assets/profile-back.png?url";
 import { SpiralHoverAnchor, SpiralHoverButton } from "./SpiralHoverWrap.jsx";
 import SkillOrbit from "./components/ui/SkillOrbit.jsx";
+import MorphingCardStack from "./components/ui/morphing-card-stack.jsx";
 
 const ACCENT = "#b48fe0";
 const ACCENT2 = "#c96b8a";
@@ -192,6 +193,38 @@ const css = `
 
   /* Skills */
   #skills { background:var(--bg); }
+  .morph-skills-wrap { max-width:720px; margin:0 auto 2.6rem; }
+  .morph-root { display:flex; flex-direction:column; gap:1rem; align-items:center; }
+  .morph-toggle-bar { display:flex; align-items:center; justify-content:center; gap:.25rem; padding:.35rem; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid var(--border); width:fit-content; margin:0 auto; }
+  .morph-toggle-btn { display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; border-radius:8px; padding:.45rem .55rem; color:var(--text3); background:transparent; transition:color .2s, background .2s; }
+  .morph-toggle-btn:hover { color:var(--text); background:rgba(255,255,255,.06); }
+  .morph-toggle-btn--active { color:#fff; background:linear-gradient(135deg,rgba(139,92,246,.55),rgba(236,72,153,.4)); box-shadow:0 2px 12px rgba(99,102,241,.22); }
+  .morph-toggle-icon { width:18px; height:18px; }
+  .morph-container { position:relative; margin:0 auto; }
+  .morph-container--stack { width:16.5rem; height:15rem; }
+  .morph-container--grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; width:100%; max-width:440px; min-height:14rem; }
+  .morph-container--list { display:flex; flex-direction:column; gap:.75rem; width:100%; max-width:480px; min-height:auto; }
+  .morph-card { cursor:pointer; border-radius:14px; border:1px solid var(--border); background:var(--bg2); padding:1rem 1.1rem; box-shadow:0 4px 18px rgba(0,0,0,.25); transition:border-color .25s, box-shadow .25s; text-align:left; }
+  .morph-card:hover { border-color:rgba(139,92,246,.45); }
+  .morph-card--stack { position:absolute; width:13.5rem; min-height:11.5rem; }
+  .morph-card--top { cursor:grab; }
+  .morph-card--top:active { cursor:grabbing; }
+  .morph-card--grid { width:100%; aspect-ratio:1; min-height:0; }
+  .morph-card--list { width:100%; }
+  .morph-card--expanded { box-shadow:0 0 0 2px rgba(139,92,246,.45),0 8px 28px rgba(0,0,0,.35); }
+  .morph-card-inner { display:flex; align-items:flex-start; gap:.75rem; }
+  .morph-card-icon-wrap { flex-shrink:0; width:2.5rem; height:2.5rem; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); font-size:1.25rem; line-height:1; }
+  .morph-card-text { min-width:0; flex:1; }
+  .morph-card-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:600; color:var(--text); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .morph-card-desc { margin:.35rem 0 0; font-size:.78rem; line-height:1.45; color:var(--text2); }
+  .morph-card-desc--stack { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .morph-card-desc--grid { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .morph-card-desc--list { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .morph-swipe-hint { position:absolute; bottom:.35rem; left:0; right:0; text-align:center; font-size:.62rem; letter-spacing:.06em; color:var(--text3); opacity:.55; pointer-events:none; font-family:'JetBrains Mono',monospace; text-transform:uppercase; }
+  .morph-dots { display:flex; justify-content:center; gap:.4rem; padding-top:.15rem; }
+  .morph-dot { width:6px; height:6px; border-radius:999px; border:none; padding:0; cursor:pointer; background:rgba(148,163,184,.35); transition:all .25s; }
+  .morph-dot:hover { background:rgba(148,163,184,.55); }
+  .morph-dot--active { width:1.1rem; background:var(--accent); }
   .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr)); gap:1.3rem; }
   .skill-card { background:var(--bg2); border-radius:18px; padding:1.6rem; border:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.3); opacity:0; transform:translateY(32px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),box-shadow .3s; }
   .skill-card.visible { opacity:1; transform:none; }
@@ -365,6 +398,15 @@ const SKILLS = [
   { icon:"🧰", title:"IDEs & Editors", tags:[["VS Code","tc"],["IntelliJ IDEA","tv"],["Xcode","ti"],["Cursor","tp"]] },
   { icon:"🤝", title:"Soft Skills", tags:[["Communication","tp"],["Customer Service","tg"],["Leadership","tv"],["Mentoring","tc"]] },
 ];
+
+function skillsToMorphCards(rows) {
+  return rows.map((s) => ({
+    id: s.title.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase(),
+    title: s.title,
+    description: s.tags.map(([label]) => label).join(" · "),
+    icon: <span aria-hidden="true">{s.icon}</span>,
+  }));
+}
 
 const CERTS = [
   { logo:"🗄️", name:"SQL for Non-Programmers", issuer:"LinkedIn Learning Community", date:"Issued Jan 2026", tags:[["SQL","tc"]] },
@@ -629,6 +671,9 @@ function Skills() {
       <div className="sec-label">What I work with</div>
       <SectionTitleDecrypt prefix="Tech" accent="Stack" />
       <div className="sec-divider" />
+      <div className="morph-skills-wrap">
+        <MorphingCardStack cards={skillsToMorphCards(SKILLS)} defaultLayout="stack" />
+      </div>
       <div className="skills-grid">
         {SKILLS.map(({ icon, title, tags }) => (
           <div className="skill-card" key={title}>
