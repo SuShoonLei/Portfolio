@@ -268,6 +268,8 @@ const css = `
   .now-card:hover { background:rgba(255,255,255,.05); border-color:rgba(180,143,224,.25); }
   .now-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; margin-bottom:1.1rem; color:var(--accent2); }
   .terminal { background:#0a0f1f; border-radius:10px; padding:1.2rem 1.4rem; font-family:'JetBrains Mono',monospace; font-size:.75rem; line-height:2; color:#a8a29e; border:1px solid rgba(255,255,255,.05); }
+  .now-terminal-link { color:#c4b5fd; text-decoration:underline; text-decoration-color:rgba(180,143,224,.45); text-underline-offset:3px; font-weight:500; }
+  .now-terminal-link:hover { color:#e9d5ff; }
   .prompt { color:var(--green); }
   .fun-list { list-style:none; display:flex; flex-direction:column; gap:.85rem; }
   .fun-list li { font-size:.88rem; line-height:1.7; color:var(--text2); padding-left:1.6rem; position:relative; transition:color .2s; }
@@ -749,7 +751,11 @@ function Now() {
         <div className="now-card reveal">
           <h3>$ ls current_ops/</h3>
           <div className="terminal">
-            <span className="prompt">→ </span>🎮&nbsp; Exploring game dev &amp; interactive design<br />
+            <span className="prompt">→ </span>🎮&nbsp; Building <strong style={{ color: "#d6bcfa" }}>GroupGame</strong> — Unity group project (C#) with classmates.{" "}
+            <SpiralHoverAnchor href="https://github.com/Min1322003/GroupGame" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
+              GitHub ↗
+            </SpiralHoverAnchor>
+            <br />
             <span className="prompt">→ </span>🤖&nbsp; Building AI-powered projects<br />
             <span className="prompt">→ </span>🔐&nbsp; Learning cybersecurity fundamentals<br />
             <span className="prompt">→ </span>🎓&nbsp; Finishing strong — graduating Dec 2026<br />
