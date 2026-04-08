@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import DecryptedText from "./DecryptedText.jsx";
 import profileBackUrl from "./assets/profile-back.png?url";
+import { SpiralHoverAnchor, SpiralHoverButton } from "./SpiralHoverWrap.jsx";
 
 const ACCENT = "#b48fe0";
 const ACCENT2 = "#c96b8a";
@@ -42,6 +43,16 @@ const css = `
   #back-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; border-radius:50%; background:transparent; color:rgba(255,255,255,.85); border:1px solid rgba(148,163,184,.4); font-size:1rem; font-weight:200; box-shadow:none; opacity:0; transform:translateY(10px); transition:opacity .3s,transform .3s,letter-spacing .35s,border-color .35s,color .35s; z-index:400; cursor:pointer; animation: btnPulseSoft 3s ease-in-out infinite; }
   #back-top.visible { opacity:1; transform:translateY(0); }
   #back-top:hover { transform:translateY(-2px); background:transparent; color:#fff; border-color:rgba(139,92,246,.55); }
+  /* GSAP spiral backdrop on hover (compact canvas behind control) */
+  .spiral-wrap { position:relative; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; }
+  .spiral-wrap__canvas { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:0; opacity:.88; mix-blend-mode:screen; }
+  .spiral-wrap__canvas--round { width:56px; height:56px; border-radius:50%; overflow:hidden; opacity:.82; }
+  .spiral-wrap__content { position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; gap:.55rem; }
+  #back-top.spiral-wrap { display:flex; align-items:center; justify-content:center; }
+  #back-top.spiral-wrap .spiral-wrap__content { width:100%; height:100%; }
+  .projects-all-gh { color:var(--accent); font-weight:200; font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; border-bottom:1px solid rgba(139,92,246,.35); padding-bottom:.2rem; transition:letter-spacing .65s ease,color .3s ease,border-color .3s ease; }
+  .projects-all-gh:hover { color:#fff; border-bottom-color:rgba(139,92,246,.75); letter-spacing:.22em; }
+  .nav-links .spiral-wrap { padding:.2rem 0; }
 
   /* Sections */
   section { padding:5.5rem 5rem; position:relative; z-index:1; }
@@ -564,8 +575,12 @@ function Hero({ links }) {
           {"}"}
         </div>
         <div className="hero-btns">
-          <a href="#projects" className="btn-primary">View My Work →</a>
-          <a href={links.linkedin} target="_blank" rel="noreferrer" className="btn-outline">LinkedIn ↗</a>
+          <SpiralHoverAnchor href="#projects" className="btn-primary" canvasW={380} canvasH={72} starCount={480}>
+            View My Work →
+          </SpiralHoverAnchor>
+          <SpiralHoverAnchor href={links.linkedin} target="_blank" rel="noreferrer" className="btn-outline" canvasW={320} canvasH={64} starCount={420}>
+            LinkedIn ↗
+          </SpiralHoverAnchor>
         </div>
       </div>
       <div className="hero-visual">
@@ -673,7 +688,9 @@ function Certifications({ credentialUrl }) {
               <div className="cert-skills">
                 {tags.map(([l, c]) => <Tag key={l} label={l} cls={c} />)}
               </div>
-              <a href={credentialUrl} target="_blank" rel="noreferrer" className="cert-link">Show credential ↗</a>
+              <SpiralHoverAnchor href={credentialUrl} target="_blank" rel="noreferrer" className="cert-link" canvasW={300} canvasH={52} starCount={360}>
+                Show credential ↗
+              </SpiralHoverAnchor>
             </div>
           </div>
         ))}
@@ -703,7 +720,9 @@ function Projects({ allProjectsUrl, linksByTitle }) {
               </div>
               <div className="p-links">
                 {(linksByTitle?.[title] || links).map(({ label, cls, href }) => (
-                  <a key={label} href={href} target="_blank" rel="noreferrer" className={`pl ${cls}`}>{label}</a>
+                  <SpiralHoverAnchor key={label} href={href} target="_blank" rel="noreferrer" className={`pl ${cls}`} canvasW={300} canvasH={52} starCount={340}>
+                    {label}
+                  </SpiralHoverAnchor>
                 ))}
               </div>
             </div>
@@ -712,7 +731,9 @@ function Projects({ allProjectsUrl, linksByTitle }) {
       </div>
       <p style={{ textAlign: "center", marginTop: "2.2rem", fontSize: ".87rem", color: "var(--text3)" }}>
         See all projects on &nbsp;
-        <a href={allProjectsUrl} target="_blank" rel="noreferrer" style={{ color: "var(--accent)", fontWeight: 500, textDecoration: "none" }}>GitHub ↗</a>
+        <SpiralHoverAnchor href={allProjectsUrl} target="_blank" rel="noreferrer" className="projects-all-gh" canvasW={280} canvasH={56} starCount={380}>
+          GitHub ↗
+        </SpiralHoverAnchor>
       </p>
     </section>
   );
@@ -766,18 +787,18 @@ function Contact({ links }) {
       <div className="sec-divider" style={{ margin: "0 auto 2.8rem" }} />
       <p className="contact-sub">Whether it's a project collab, an internship opportunity, or just a friendly hello — I'd love to hear from you! ✨</p>
       <div className="contact-grid">
-        <a href={`mailto:${links.email}`} className="cl">
+        <SpiralHoverAnchor href={`mailto:${links.email}`} className="cl" canvasW={400} canvasH={58} starCount={400}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           Email Me
-        </a>
-        <a href={links.linkedin} target="_blank" rel="noreferrer" className="cl">
+        </SpiralHoverAnchor>
+        <SpiralHoverAnchor href={links.linkedin} target="_blank" rel="noreferrer" className="cl" canvasW={360} canvasH={58} starCount={380}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
-        </a>
-        <a href={links.github} target="_blank" rel="noreferrer" className="cl">
+        </SpiralHoverAnchor>
+        <SpiralHoverAnchor href={links.github} target="_blank" rel="noreferrer" className="cl" canvasW={360} canvasH={58} starCount={380}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
           GitHub
-        </a>
+        </SpiralHoverAnchor>
       </div>
       <p className="footer-sig">Made with 💜 by Su Shoon Lei Khaing · SUNY Oswego '26 · she/her ✨</p>
     </section>
@@ -796,17 +817,27 @@ function Nav({ scrolled, active }) {
   }
   return (
     <nav className={scrolled ? "scrolled" : ""}>
-      <a href="#hero" className="nav-logo" onClick={e => { e.preventDefault(); scrollTo("#hero"); }}>
+      <SpiralHoverAnchor
+        href="#hero"
+        className="nav-logo"
+        canvasW={200}
+        canvasH={44}
+        starCount={220}
+        onClick={e => { e.preventDefault(); scrollTo("#hero"); }}
+      >
         Su <span>✦</span>
-      </a>
+      </SpiralHoverAnchor>
       <ul className="nav-links">
         {NAV_LINKS.map(([href, label]) => (
           <li key={href}>
-            <a
+            <SpiralHoverAnchor
               href={href}
               className={active === href ? "active" : ""}
+              canvasW={240}
+              canvasH={40}
+              starCount={200}
               onClick={e => { e.preventDefault(); scrollTo(href); }}
-            >{label}</a>
+            >{label}</SpiralHoverAnchor>
           </li>
         ))}
       </ul>
@@ -878,12 +909,15 @@ export default function Portfolio() {
       <BgCanvas />
       <div id="progress-bar" style={{ width: progress + "%" }} />
       <Nav scrolled={scrolled} active={activeSection} />
-      <button
+      <SpiralHoverButton
         id="back-top"
         className={showTop ? "visible" : ""}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
-      >↑</button>
+        ariaLabel="Back to top"
+        canvasW={52}
+        canvasH={52}
+        starCount={260}
+      >↑</SpiralHoverButton>
       <Hero links={config.links} />
       <Skills />
       <Experience />
