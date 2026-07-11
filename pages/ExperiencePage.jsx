@@ -9,7 +9,6 @@ export default function ExperiencePage() {
       <div className="sec-divider" />
       <div className="timeline">
         <div className="timeline-item">
-          <div className="tl-dot" />
           <div className="tl-date">June 2026 — Present · Leadership · On-campus</div>
           <div className="tl-role">Vice President — Founder</div>
           <div className="tl-org">Women In Computing [WiC] · SUNY Oswego</div>
@@ -26,7 +25,6 @@ export default function ExperiencePage() {
           </div>
         </div>
         <div className="timeline-item">
-          <div className="tl-dot" />
           <div className="tl-date">Aug 2024 · Move-in season · On-campus</div>
           <div className="tl-role">Laker Move-In Captain</div>
           <div className="tl-org">Hart Hall &amp; Riggs Hall · Residential Life · SUNY Oswego</div>
@@ -44,7 +42,6 @@ export default function ExperiencePage() {
           </div>
         </div>
         <div className="timeline-item">
-          <div className="tl-dot" />
           <div className="tl-date">May 2024 — Present · Part-time · On-site</div>
           <div className="tl-role">Student Ambassador</div>
           <div className="tl-org">ISSS Office (International Student &amp; Scholar Services) · SUNY Oswego</div>
@@ -59,7 +56,6 @@ export default function ExperiencePage() {
           </div>
         </div>
         <div className="timeline-item">
-          <div className="tl-dot" />
           <div className="tl-date">Aug 2023 — Dec 2026</div>
           <div className="tl-role">BS Computer Science · GPA 3.6</div>
           <div className="tl-org">State University of New York at Oswego</div>
