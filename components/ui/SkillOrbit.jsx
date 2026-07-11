@@ -56,7 +56,7 @@ function usePrefersReducedMotion() {
 
 /**
  * Orbiting skill icons (ported from stack-feature-section for Vite + JSX).
- * Styling lives in portfolio_v2.jsx (`.skill-orbit-*`).
+ * Styling lives in styles/portfolio.css (`.skill-orbit-*`).
  */
 export default function SkillOrbit() {
   const reduceMotion = usePrefersReducedMotion();

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { SpiralAnimation } from "./SpiralAnimation.jsx";
 
 function usePrefersReducedMotion() {
@@ -13,10 +14,21 @@ function usePrefersReducedMotion() {
   return reduce;
 }
 
+function SpiralBackdrop({ hot, reduceMotion, canvasW, canvasH, starCount, round }) {
+  if (!hot || reduceMotion) return null;
+  return (
+    <span className={`spiral-wrap__canvas${round ? " spiral-wrap__canvas--round" : ""}`}>
+      <SpiralAnimation width={canvasW} height={canvasH} starCount={starCount} />
+    </span>
+  );
+}
+
 /**
- * Hover/focus spiral backdrop behind links & buttons (compact canvas, GSAP spiral).
+ * Hover/focus spiral backdrop behind links & buttons.
+ * Pass `to` for in-app React Router navigation; `href` for external / mailto.
  */
 export function SpiralHoverAnchor({
+  to,
   href,
   className = "",
   children,
@@ -31,29 +43,51 @@ export function SpiralHoverAnchor({
   const [hot, setHot] = useState(false);
   const reduceMotion = usePrefersReducedMotion();
 
+  const hoverHandlers = {
+    onMouseEnter: () => { if (!reduceMotion) setHot(true); },
+    onMouseLeave: () => setHot(false),
+    onFocus: () => { if (!reduceMotion) setHot(true); },
+    onBlur: () => setHot(false),
+  };
+
+  const content = (
+    <>
+      <SpiralBackdrop
+        hot={hot}
+        reduceMotion={reduceMotion}
+        canvasW={canvasW}
+        canvasH={canvasH}
+        starCount={starCount}
+      />
+      <span className="spiral-wrap__content">{children}</span>
+    </>
+  );
+
+  if (to != null) {
+    return (
+      <Link
+        {...rest}
+        to={to}
+        className={`spiral-wrap ${className}`.trim()}
+        onClick={onClick}
+        {...hoverHandlers}
+      >
+        {content}
+      </Link>
+    );
+  }
+
   return (
     <a
       {...rest}
       href={href}
-      className={`spiral-wrap ${className}`}
+      className={`spiral-wrap ${className}`.trim()}
       target={target}
       rel={rel}
       onClick={onClick}
-      onMouseEnter={() => {
-        if (!reduceMotion) setHot(true);
-      }}
-      onMouseLeave={() => setHot(false)}
-      onFocus={() => {
-        if (!reduceMotion) setHot(true);
-      }}
-      onBlur={() => setHot(false)}
+      {...hoverHandlers}
     >
-      {hot && !reduceMotion ? (
-        <span className="spiral-wrap__canvas">
-          <SpiralAnimation width={canvasW} height={canvasH} starCount={starCount} />
-        </span>
-      ) : null}
-      <span className="spiral-wrap__content">{children}</span>
+      {content}
     </a>
   );
 }
@@ -78,7 +112,7 @@ export function SpiralHoverButton({
       {...rest}
       type={type}
       id={id}
-      className={`spiral-wrap ${className}`}
+      className={`spiral-wrap ${className}`.trim()}
       onClick={onClick}
       aria-label={ariaLabel}
       onMouseEnter={() => {
@@ -90,11 +124,14 @@ export function SpiralHoverButton({
       }}
       onBlur={() => setHot(false)}
     >
-      {hot && !reduceMotion ? (
-        <span className="spiral-wrap__canvas spiral-wrap__canvas--round">
-          <SpiralAnimation width={canvasW} height={canvasH} starCount={starCount} />
-        </span>
-      ) : null}
+      <SpiralBackdrop
+        hot={hot}
+        reduceMotion={reduceMotion}
+        canvasW={canvasW}
+        canvasH={canvasH}
+        starCount={starCount}
+        round
+      />
       <span className="spiral-wrap__content">{children}</span>
     </button>
   );
