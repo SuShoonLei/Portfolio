@@ -653,6 +653,23 @@ function Experience() {
       <div className="timeline">
         <div className="timeline-item">
           <div className="tl-dot" />
+          <div className="tl-date">June 2026 — Present · Leadership · On-campus</div>
+          <div className="tl-role">Vice President — Founder</div>
+          <div className="tl-org">Women In Computing [WiC] · SUNY Oswego</div>
+          <p className="tl-desc">
+            Lead and grow a student organization that promotes the participation and success of women in computing and technology-related fields through workshops, networking, and community building.
+          </p>
+          <ul className="tl-bullets">
+            <li>Lead and coordinate organization initiatives that promote the participation and success of women in computing and technology-related fields</li>
+            <li>Collaborate with executive board members to plan workshops, networking events, and professional development opportunities for students</li>
+            <li>Support member engagement and organizational growth by fostering an inclusive and welcoming community for students interested in computing</li>
+          </ul>
+          <div className="tl-tags">
+            {[["Leadership","tg"],["Community Building","tp"],["Event Planning","tc"],["Mentorship","tv"],["Public Speaking","ti"],["Team Collaboration","ty"]].map(([l,c])=><Tag key={l} label={l} cls={c}/>)}
+          </div>
+        </div>
+        <div className="timeline-item">
+          <div className="tl-dot" />
           <div className="tl-date">Aug 2024 · Move-in season · On-campus</div>
           <div className="tl-role">Laker Move-In Captain</div>
           <div className="tl-org">Hart Hall &amp; Riggs Hall · Residential Life · SUNY Oswego</div>
