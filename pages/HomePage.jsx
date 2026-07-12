@@ -3,6 +3,7 @@ import DecryptedText from "../DecryptedText.jsx";
 import { SpiralHoverAnchor } from "../SpiralHoverWrap.jsx";
 import SkillOrbit from "../components/ui/SkillOrbit.jsx";
 import { FlipCard } from "../components/FlipCard.jsx";
+import ShapeBlur from "../components/ShapeBlur.jsx";
 import { PHRASES } from "../data/portfolio.js";
 import { useOutletContext } from "react-router-dom";
 
@@ -32,6 +33,7 @@ function HeroDecryptTagline() {
 export default function HomePage() {
   const { config } = useOutletContext();
   const links = config.links;
+  const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
   return (
     <section id="hero">
@@ -47,14 +49,27 @@ export default function HomePage() {
           A graduating CS senior at <strong>SUNY Oswego</strong> with a love for building things at the intersection of <em>creativity and code</em>. Whether it&apos;s a game, web app, AI tool, or handmade craft, I put the same passion into everything I create.
         </p>
         <div className="code-snippet">
-          <span className="cm"># su.py</span><br />
-          <span className="ck">su</span> = {"{"}<br />
-          &nbsp;&nbsp;<span className="cs">"school"</span>{"     "}: <span className="cv">"SUNY Oswego - CS (Dec 2026)"</span>,<br />
-          &nbsp;&nbsp;<span className="cs">"interests"</span>{"  "}: [<span className="cv">"Game Dev"</span>, <span className="cv">"Web Dev"</span>, <span className="cv">"AI/ML"</span>, <span className="cv">"App Dev"</span>, <span className="cv">"Cybersecurity"</span>],<br />
-          &nbsp;&nbsp;<span className="cs">"crafts"</span>{"     "}: [<span className="cv">"Resin 🎨"</span>, <span className="cv">"Lip Gloss 💄"</span>, <span className="cv">"Candles 🕯️"</span>],<br />
-          &nbsp;&nbsp;<span className="cs">"also_loves"</span>{" "}: [<span className="cv">"Cooking 🍳"</span>, <span className="cv">"Traveling ✈️"</span>],<br />
-          &nbsp;&nbsp;<span className="cs">"fun_fact"</span>{"   "}: <span className="cv">"Creates things digitally AND with her hands 💻🤲"</span><br />
-          {"}"}
+          <div className="code-snippet-blur" aria-hidden="true">
+            <ShapeBlur
+              variation={0}
+              pixelRatioProp={dpr}
+              shapeSize={0.5}
+              roundness={0.5}
+              borderSize={0.05}
+              circleSize={0.5}
+              circleEdge={1}
+            />
+          </div>
+          <div className="code-snippet-body">
+            <span className="cm"># su.py</span><br />
+            <span className="ck">su</span> = {"{"}<br />
+            &nbsp;&nbsp;<span className="cs">"school"</span>{"     "}: <span className="cv">"SUNY Oswego - CS (Dec 2026)"</span>,<br />
+            &nbsp;&nbsp;<span className="cs">"interests"</span>{"  "}: [<span className="cv">"Game Dev"</span>, <span className="cv">"Web Dev"</span>, <span className="cv">"AI/ML"</span>, <span className="cv">"App Dev"</span>, <span className="cv">"Cybersecurity"</span>],<br />
+            &nbsp;&nbsp;<span className="cs">"crafts"</span>{"     "}: [<span className="cv">"Resin 🎨"</span>, <span className="cv">"Lip Gloss 💄"</span>, <span className="cv">"Candles 🕯️"</span>],<br />
+            &nbsp;&nbsp;<span className="cs">"also_loves"</span>{" "}: [<span className="cv">"Cooking 🍳"</span>, <span className="cv">"Traveling ✈️"</span>],<br />
+            &nbsp;&nbsp;<span className="cs">"fun_fact"</span>{"   "}: <span className="cv">"Creates things digitally AND with her hands 💻🤲"</span><br />
+            {"}"}
+          </div>
         </div>
         <div className="hero-btns">
           <SpiralHoverAnchor to="/projects" className="btn-primary" canvasW={380} canvasH={72} starCount={480}>
