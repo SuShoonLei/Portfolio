@@ -8,6 +8,9 @@ import ProjectsPage from "./pages/ProjectsPage.jsx";
 import NowPage from "./pages/NowPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 
+// Match Vite `base` (e.g. "/" on Vercel, "/Portfolio/" on GitHub Pages)
+const basename = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || undefined;
+
 const router = createBrowserRouter(
   [
     {
@@ -25,7 +28,7 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: "/Portfolio" }
+  basename ? { basename } : undefined
 );
 
 export default function App() {

@@ -1,7 +1,10 @@
 import { defineConfig } from "vite";
 
+// GitHub Pages serves under /Portfolio/; Vercel (and most hosts) serve at /
+const base = process.env.VERCEL ? "/" : (process.env.VITE_BASE || "/Portfolio/");
+
 export default defineConfig({
-  base: "/Portfolio/",
+  base,
   server: {
     proxy: {
       "/api": {

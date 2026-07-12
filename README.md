@@ -19,7 +19,7 @@ Personal portfolio site for **Su Shoon Lei Khaing**, CS senior at SUNY Oswego.
 |--------|--------|
 | Frontend | React, Vite, React Router, GSAP, Motion, React Icons |
 | Backend (optional) | Java, Spring Boot, Maven |
-| Deploy | GitHub Pages (`base: /Portfolio/`) |
+| Deploy | Vercel (root `/`) · GitHub Pages (`/Portfolio/`) |
 
 ## Quick start
 
@@ -31,9 +31,14 @@ npm run dev
 ```
 
 Open [http://localhost:5173/Portfolio/](http://localhost:5173/Portfolio/)  
-(Vite is configured with `base: "/Portfolio/"`, so that path is required.)
+(Local/dev and GitHub Pages use `base: /Portfolio/`. Vercel builds use `/` automatically.)
 
 Pages: `/`, `/skills`, `/experience`, `/certifications`, `/projects`, `/now`, `/contact`
+
+### Deploy on Vercel
+
+Connect the GitHub repo in Vercel. Framework preset **Vite**, output **`dist`**, build **`npm run build`**.  
+`vercel.json` rewrites all routes to `index.html` so React Router deep links work.
 
 ### Backend (optional)
 
