@@ -88,6 +88,15 @@
   .hero-greeting { font-family:'JetBrains Mono',monospace; font-size:.9rem; color:var(--comment); margin-bottom:.5rem; animation:fadeUp .7s .1s ease both; text-transform:uppercase; letter-spacing:.08em; }
   .hero-name { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.6rem,4.5vw,4.4rem); line-height:1.08; color:var(--text); margin-bottom:.3rem; animation:fadeUp .7s .15s ease both; }
   .hero-name em { font-style:normal; color:var(--keyword); background:none; -webkit-text-fill-color:unset; }
+  .hero-welcome {
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1rem,1.6vw,1.2rem);
+    line-height:1.55;
+    color:var(--text2);
+    max-width:34rem;
+    margin:0.55rem 0 1rem;
+    animation:fadeUp .7s .18s ease both;
+  }
   .hero-tagline { font-family:'JetBrains Mono',monospace; font-size:.86rem; color:var(--function); letter-spacing:.04em; margin-bottom:1.4rem; animation:fadeUp .7s .22s ease both; min-height:1.35em; }
   .hero-dt-wrap { display:inline !important; }
   .hero-dt-rev { color:var(--function); }

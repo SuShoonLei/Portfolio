@@ -39,6 +39,9 @@ export default function HomePage() {
         <div className="pronouns-badge"><span>✦</span> she / her</div>
         <p className="hero-greeting">👋 Hi, I&apos;m</p>
         <h1 className="hero-name">Su Shoon Lei<br /><em>Khaing</em></h1>
+        <p className="hero-welcome">
+          Code is how I solve problems. Curiosity is why I keep doing it.
+        </p>
         <HeroDecryptTagline />
         <p className="hero-bio">
           A graduating CS senior at <strong>SUNY Oswego</strong> with a love for building things at the intersection of <em>creativity and code</em>. Whether it&apos;s a game, web app, AI tool, or handmade craft, I put the same passion into everything I create.
