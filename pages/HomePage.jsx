@@ -49,7 +49,7 @@ export default function HomePage() {
           A graduating CS senior at <strong>SUNY Oswego</strong> with a love for building things at the intersection of <em>creativity and code</em>. Whether it&apos;s a game, web app, AI tool, or handmade craft, I put the same passion into everything I create.
         </p>
         <div className="code-snippet">
-          <div className="code-snippet-blur" aria-hidden="true">
+          <div className="code-snippet-border" aria-hidden="true">
             <ShapeBlur
               variation={0}
               pixelRatioProp={dpr}
