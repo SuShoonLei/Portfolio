@@ -66,7 +66,7 @@ export default function HomePage() {
             &nbsp;&nbsp;<span className="cs">"school"</span>{"     "}: <span className="cv">"SUNY Oswego - CS (Dec 2026)"</span>,<br />
             &nbsp;&nbsp;<span className="cs">"interests"</span>{"  "}: [<span className="cv">"Game Dev"</span>, <span className="cv">"Web Dev"</span>, <span className="cv">"AI/ML"</span>, <span className="cv">"App Dev"</span>, <span className="cv">"Cybersecurity"</span>],<br />
             &nbsp;&nbsp;<span className="cs">"crafts"</span>{"     "}: [<span className="cv">"Resin 🎨"</span>, <span className="cv">"Lip Gloss 💄"</span>, <span className="cv">"Candles 🕯️"</span>],<br />
-            &nbsp;&nbsp;<span className="cs">"also_loves"</span>{" "}: [<span className="cv">"Cooking 🍳"</span>, <span className="cv">"Traveling ✈️"</span>],<br />
+            &nbsp;&nbsp;<span className="cs">"also_loves"</span>{" "}: [<span className="cv">"Cooking 🍳"</span>, <span className="cv">"Traveling ✈️"</span>, <span className="cv">"Shopping 🛍️"</span> ],<br />
             &nbsp;&nbsp;<span className="cs">"fun_fact"</span>{"   "}: <span className="cv">"Creates things digitally AND with her hands 💻🤲"</span><br />
             {"}"}
           </div>
