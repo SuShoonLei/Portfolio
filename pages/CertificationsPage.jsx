@@ -19,7 +19,7 @@ export default function CertificationsPage() {
       </h2>
       <div className="sec-divider" />
       <div className="certs-grid">
-        {CERTS.map(({ logo, name, issuer, date, tags }) => (
+        {CERTS.map(({ logo, name, issuer, date, tags, credentialHref }) => (
           <div className="cert-card" key={name}>
             <div className="cert-logo">{logo}</div>
             <div className="cert-info">
@@ -29,7 +29,7 @@ export default function CertificationsPage() {
               <div className="cert-skills">
                 {tags.map(([l, c]) => <Tag key={l} label={l} cls={c} />)}
               </div>
-              <SpiralHoverAnchor href={credentialUrl} target="_blank" rel="noreferrer" className="cert-link" canvasW={300} canvasH={52} starCount={360}>
+              <SpiralHoverAnchor href={credentialHref || credentialUrl} target="_blank" rel="noreferrer" className="cert-link" canvasW={300} canvasH={52} starCount={360}>
                 Show credential ↗
               </SpiralHoverAnchor>
             </div>

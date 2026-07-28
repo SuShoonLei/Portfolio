@@ -8,6 +8,14 @@ export const SKILLS = [
 ];
 
 export const CERTS = [
+  {
+    logo:"🌍",
+    name:"ISSS Office Assistant Certificate of Completion",
+    issuer:"SUNY Oswego · International Student & Scholar Services (Student Ambassador)",
+    date:"Issued May 2026",
+    tags:[["Student Ambassador","tp"],["ISSS","tc"],["Leadership","tv"],["International Education","tg"]],
+    credentialHref: new URL("../assets/isss-office-assistant-certificate.png", import.meta.url).href,
+  },
   { logo:"🗄️", name:"SQL for Non-Programmers", issuer:"LinkedIn Learning Community", date:"Issued Jan 2026", tags:[["SQL","tc"]] },
   { logo:"🤖", name:"Prompt Engineering: How to Talk to the AIs", issuer:"LinkedIn Learning Community", date:"Issued Jan 2026", tags:[["Prompt Engineering","tv"],["AI","tg"],["LLM","tc"]] },
   { logo:"⚡", name:"Advanced C Programming: Optimize Performance and Efficiency", issuer:"LinkedIn Learning Community", date:"Issued Jan 2026", tags:[["C","ti"]] },
