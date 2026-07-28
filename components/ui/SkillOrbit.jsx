@@ -19,6 +19,7 @@ import {
   SiGithubactions,
   SiIntellijidea,
 } from "react-icons/si";
+import orbitAvatarUrl from "../../assets/orbit-avatar.png";
 
 /** Tech stack icons (colors ≈ brand) — matches portfolio skills focus */
 const iconConfigs = [
@@ -68,7 +69,12 @@ export default function SkillOrbit() {
     <div className="skill-orbit-viewport" aria-hidden="true">
       <div className="skill-orbit-shifted">
         <div className="skill-orbit-hub">
-          <SiReact className="skill-orbit-hub-icon" style={{ color: "#61DAFB" }} />
+          <img
+            className="skill-orbit-hub-img"
+            src={orbitAvatarUrl}
+            alt=""
+            draggable={false}
+          />
         </div>
         {[...Array(orbitCount)].map((_, orbitIdx) => {
           const sizeRem = 9 + orbitGapRem * (orbitIdx + 1);

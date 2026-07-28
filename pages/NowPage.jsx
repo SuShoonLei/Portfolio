@@ -11,12 +11,16 @@ export default function NowPage() {
         <div className="now-card reveal">
           <h3>$ ls current_ops/</h3>
           <div className="terminal">
-            <span className="prompt">→ </span>🎮&nbsp; Building <strong style={{ color: "var(--purple)" }}>Out You Run! 2D platformer</strong> — Unity group project (C#) with classmates.{" "}
+            <span className="prompt">→ </span>🎭&nbsp; Building <strong style={{ color: "var(--purple)" }}>Camrades</strong> — multiplayer AI-judged charades (CLIP in the browser).{" "}
+            <SpiralHoverAnchor href="https://github.com/SuShoonLei/Camrades" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
+              GitHub ↗
+            </SpiralHoverAnchor>
+            <br />
+            <span className="prompt">→ </span>🎮&nbsp; Also shipping <strong style={{ color: "var(--function)" }}>Out You Run!</strong> — Unity 2D platformer with classmates{" "}
             <SpiralHoverAnchor href="https://github.com/Min1322003/GroupGame" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
               GitHub ↗
             </SpiralHoverAnchor>
             <br />
-            <span className="prompt">→ </span>🤖&nbsp; Building AI-powered projects<br />
             <span className="prompt">→ </span>🔐&nbsp; Learning cybersecurity fundamentals<br />
             <span className="prompt">→ </span>🎓&nbsp; Finishing strong — graduating Dec 2026<br />
             <span className="prompt">→ </span>🌏&nbsp; Dreaming up the next travel destination ✈️

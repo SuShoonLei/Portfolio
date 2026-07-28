@@ -16,6 +16,14 @@ export const CERTS = [
 
 export const PROJECTS = [
   {
+    banner:"🎭",
+    bannerBg:"linear-gradient(135deg,#2a2438,#3d4a5c)",
+    title:"Camrades",
+    desc:"Multiplayer charades where a CLIP vision model is the judge. Teams submit words, performers act on camera, and on-device AI guesses live from a decoy pool—React, Socket.IO, and Transformers.js, no server-side inference.",
+    tags:[["React","tc"],["TypeScript","ti"],["Socket.IO","tv"],["CLIP / AI","tg"],["Vite","ty"],["In Progress","tp"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/Camrades" }],
+  },
+  {
     banner:"📡",
     bannerBg:"linear-gradient(135deg,#2a2430,#3d4a5c)",
     title:"SocketBench",
@@ -38,6 +46,17 @@ export const PROJECTS = [
     desc:"Parallel genetic algorithm that places factory stations on a 2D grid to maximize pairwise affinity—multi-worker evolution with live visualization.",
     tags:[["Java","ty"],["Genetic Algorithm","tv"],["Parallel","tc"],["Optimization","ti"],["Swing/GUI","tp"]],
     links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/GeneticAlgorithm" }],
+  },
+];
+
+export const BUILT_PROJECTS = [
+  {
+    banner:"🛒",
+    bannerBg:"linear-gradient(135deg,#24302e,#3a4a48)",
+    title:"SHOP — Students Helping Oz Peers",
+    desc:"Full-stack web app for the SUNY Oswego student food pantry: public inventory browser, staff dashboard, checkouts, donations, requests, and SQL-backed reports—React, Express, and PostgreSQL.",
+    tags:[["React","tc"],["Node.js","tg"],["Express","ty"],["PostgreSQL","ti"],["Tailwind","tv"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/SHOP_SUNY_Oswego" }],
   },
 ];
 
