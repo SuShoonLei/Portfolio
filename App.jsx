@@ -5,6 +5,7 @@ import SkillsPage from "./pages/SkillsPage.jsx";
 import ExperiencePage from "./pages/ExperiencePage.jsx";
 import CertificationsPage from "./pages/CertificationsPage.jsx";
 import ProjectsPage from "./pages/ProjectsPage.jsx";
+import GamesPage from "./pages/GamesPage.jsx";
 import NowPage from "./pages/NowPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         { path: "experience", element: <ExperiencePage /> },
         { path: "certifications", element: <CertificationsPage /> },
         { path: "projects", element: <ProjectsPage /> },
+        { path: "games", element: <GamesPage /> },
         { path: "now", element: <NowPage /> },
         { path: "contact", element: <ContactPage /> },
         { path: "*", element: <Navigate to="/" replace /> },

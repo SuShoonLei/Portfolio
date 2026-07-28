@@ -32,14 +32,6 @@ export const PROJECTS = [
     links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/SocketBench" }],
   },
   {
-    banner:"🧩",
-    bannerBg:"linear-gradient(135deg,#243530,#2f4a48)",
-    title:"Sudoku Game (API + Swing)",
-    desc:"Desktop Sudoku with Swing UI, Dosuku API puzzles, validation and hints via backtracking, plus distributed hint servers for harder cases.",
-    tags:[["Java","ty"],["Swing","tp"],["REST API","tc"],["Concurrency","tv"],["Maven","tg"]],
-    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/two--player-game-puzzle-using-parallel-move-evaluation" }],
-  },
-  {
     banner:"🧬",
     bannerBg:"linear-gradient(135deg,#2e2438,#3a3550)",
     title:"Factory Layout Optimizer (GA)",
@@ -49,7 +41,28 @@ export const PROJECTS = [
   },
 ];
 
-export const BUILT_PROJECTS = [
+export const BUILT_PROJECTS = [];
+
+export const WEBSITES = [
+  {
+    banner:"✨",
+    bannerBg:"linear-gradient(135deg,#2e2438,#4a3558)",
+    title:"ZuZu's Portfolio",
+    desc:"Personal portfolio for Myat Myint Zu (HR Leader, Bangkok)—React + Vite with Three.js antigravity cursor particles and a WebGL metallic paint name treatment.",
+    tags:[["React","tc"],["Vite","ty"],["Three.js","tv"],["WebGL","ti"],["CSS","tg"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/ZuZu-s-Portfolio" }],
+  },
+  {
+    banner:"💻",
+    bannerBg:"linear-gradient(135deg,#24303a,#3d4a5c)",
+    title:"Su Shoon Lei — Portfolio",
+    desc:"This site—multi-page React portfolio with GSAP spiral hovers, decrypted text, electric borders, skill orbit, and optional Spring Boot config API. Deployed on Vercel and GitHub Pages.",
+    tags:[["React","tc"],["Vite","ty"],["React Router","ti"],["GSAP","tv"],["Spring Boot","tg"]],
+    links:[
+      { label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/Portfolio" },
+      { label:"↗ Live", cls:"pl-live", href:"https://sushoonlei.github.io/Portfolio/" },
+    ],
+  },
   {
     banner:"🛒",
     bannerBg:"linear-gradient(135deg,#24302e,#3a4a48)",
@@ -57,6 +70,49 @@ export const BUILT_PROJECTS = [
     desc:"Full-stack web app for the SUNY Oswego student food pantry: public inventory browser, staff dashboard, checkouts, donations, requests, and SQL-backed reports—React, Express, and PostgreSQL.",
     tags:[["React","tc"],["Node.js","tg"],["Express","ty"],["PostgreSQL","ti"],["Tailwind","tv"]],
     links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/SHOP_SUNY_Oswego" }],
+  },
+  {
+    banner:"🐾",
+    bannerBg:"linear-gradient(135deg,#2e2838,#4a3a55)",
+    title:"StudyPaws",
+    desc:"Cute Pomodoro study timer with animated animal companions—focus, play a food mini-game for treats, then feed your pet. React frontend with an optional FastAPI backend.",
+    tags:[["React","tc"],["JavaScript","ty"],["FastAPI","tg"],["Python","ti"],["Vite","tv"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/StudyPaws" }],
+  },
+];
+
+export const GAMES = [
+  {
+    banner:"🚢",
+    bannerBg:"linear-gradient(135deg,#1e2a38,#2f4a5c)",
+    title:"BattleShip",
+    desc:"Multiplayer Battleship (3–4 players) built as a WebSocket network testing tool—vanilla browser client, Node.js ws server, optional Java Swing client, with RTT stats and reconnect.",
+    tags:[["JavaScript","ty"],["WebSocket","tc"],["Node.js","tg"],["Java","ti"],["Networking","tv"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/BattleShip" }],
+  },
+  {
+    banner:"🏃",
+    bannerBg:"linear-gradient(135deg,#2a2430,#3d4a5c)",
+    title:"Out You Run!",
+    desc:"Unity 2D multiplayer platformer with classmates—Netcode for GameObjects, LAN discovery, client-authoritative movement, server-spawned weapons/spells, and NPC combat.",
+    tags:[["Unity","ty"],["C#","tc"],["Netcode","tv"],["Multiplayer","ti"],["2D","tg"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/Min1322003/GroupGame" }],
+  },
+  {
+    banner:"👀",
+    bannerBg:"linear-gradient(135deg,#2e2438,#3a3550)",
+    title:"PeekABoo",
+    desc:"Desktop peek-a-boo game built with libGDX and LWJGL3—shared core game logic with a Gradle desktop launcher.",
+    tags:[["Java","ty"],["libGDX","tc"],["LWJGL3","tv"],["Gradle","tg"],["Desktop","ti"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/PeekABoo" }],
+  },
+  {
+    banner:"🧩",
+    bannerBg:"linear-gradient(135deg,#243530,#2f4a48)",
+    title:"Sudoku Game (API + Swing)",
+    desc:"Desktop Sudoku with Swing UI, Dosuku API puzzles, validation and hints via backtracking, plus distributed hint servers for harder cases.",
+    tags:[["Java","ty"],["Swing","tp"],["REST API","tc"],["Concurrency","tv"],["Maven","tg"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/two--player-game-puzzle-using-parallel-move-evaluation" }],
   },
 ];
 
@@ -98,6 +154,7 @@ export const NAV_LINKS = [
   ["/experience", "Experience"],
   ["/certifications", "Certs"],
   ["/projects", "Projects"],
+  ["/games", "Games"],
   ["/now", "Now"],
   ["/contact", "Contact"],
 ];

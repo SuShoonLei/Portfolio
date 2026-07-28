@@ -13,6 +13,7 @@ const PAGE_TITLES = {
   "/experience": "Experience",
   "/certifications": "Certifications",
   "/projects": "Projects",
+  "/games": "Games",
   "/now": "Currently Up To",
   "/contact": "Contact",
 };
