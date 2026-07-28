@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { SpiralHoverButton } from "../SpiralHoverWrap.jsx";
 import { BgCanvas } from "./BgCanvas.jsx";
+import SplashCursor from "./SplashCursor.jsx";
 import { Nav } from "./Nav.jsx";
 import { useScrollReveal } from "./useScrollReveal.js";
 import { DEFAULT_CONFIG } from "../data/portfolio.js";
@@ -74,10 +75,13 @@ export default function Layout() {
     };
   }, []);
 
+  const isHome = pathname === "/";
+
   return (
     <>
       <div className="noise-overlay" />
       <BgCanvas />
+      {!isHome && <SplashCursor />}
       <div id="progress-bar" style={{ width: progress + "%" }} />
       <Nav scrolled={scrolled} />
       <SpiralHoverButton
