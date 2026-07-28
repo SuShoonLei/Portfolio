@@ -154,6 +154,7 @@ export const NAV_LINKS = [
   ["/experience", "Experience"],
   ["/certifications", "Certs"],
   ["/projects", "Projects"],
+  ["/websites", "Websites"],
   ["/games", "Games"],
   ["/now", "Now"],
   ["/contact", "Contact"],

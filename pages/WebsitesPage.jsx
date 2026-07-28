@@ -2,14 +2,13 @@ import { useOutletContext } from "react-router-dom";
 import { SpiralHoverAnchor } from "../SpiralHoverWrap.jsx";
 import { Tag } from "../components/Tag.jsx";
 import { SectionTitleDecrypt } from "../components/SectionTitleDecrypt.jsx";
-import { PROJECTS, BUILT_PROJECTS } from "../data/portfolio.js";
+import { WEBSITES } from "../data/portfolio.js";
 
-function ProjectCard({ banner, bannerBg, hackathon, title, desc, tags, links, linksByTitle }) {
+function WebsiteCard({ banner, bannerBg, title, desc, tags, links, linksByTitle }) {
   return (
     <div className="project-card">
       <div className="p-banner-wrap">
         <div className="p-banner" style={{ background: bannerBg }}>{banner}</div>
-        {hackathon && <span className="hackathon-badge">🏆 Hackathon</span>}
       </div>
       <div className="p-body">
         <div className="p-title">{title}</div>
@@ -29,44 +28,20 @@ function ProjectCard({ banner, bannerBg, hackathon, title, desc, tags, links, li
   );
 }
 
-function ProjectBlock({ label, prefix, accent, items, linksByTitle }) {
-  if (!items?.length) return null;
-  return (
-    <div className="projects-built-block">
-      <div className="sec-label">{label}</div>
-      <SectionTitleDecrypt prefix={prefix} accent={accent} />
-      <div className="sec-divider" />
-      <div className="projects-grid">
-        {items.map(project => (
-          <ProjectCard key={project.title} {...project} linksByTitle={linksByTitle} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default function ProjectsPage() {
+export default function WebsitesPage() {
   const { config } = useOutletContext();
   const { allProjectsUrl, linksByTitle } = config.projects;
 
   return (
-    <section id="projects">
-      <div className="sec-label">Things I've built</div>
-      <SectionTitleDecrypt prefix="Featured" accent="Projects" />
+    <section id="websites">
+      <div className="sec-label">Sites I've designed & shipped</div>
+      <SectionTitleDecrypt prefix="Web" accent="Sites" />
       <div className="sec-divider" />
       <div className="projects-grid">
-        {PROJECTS.map(project => (
-          <ProjectCard key={project.title} {...project} linksByTitle={linksByTitle} />
+        {WEBSITES.map(site => (
+          <WebsiteCard key={site.title} {...site} linksByTitle={linksByTitle} />
         ))}
       </div>
-
-      <ProjectBlock
-        label="More of my work"
-        prefix="Built"
-        accent="Projects"
-        items={BUILT_PROJECTS}
-        linksByTitle={linksByTitle}
-      />
 
       <p style={{ textAlign: "center", marginTop: "2.2rem", fontSize: ".87rem", color: "var(--text3)" }}>
         See all projects on &nbsp;
