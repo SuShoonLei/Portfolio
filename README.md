@@ -2,7 +2,7 @@
 
 Personal portfolio site for **Su Shoon Lei Khaing**, CS senior at SUNY Oswego.
 
-**Live site:** [https://sushoonlei.github.io/Portfolio/](https://sushoonlei.github.io/Portfolio/)
+**Live site:** https://sushoonlei.vercel.app/now
 
 ## Features
 
