@@ -24,6 +24,25 @@ export const CERTS = [
 
 export const PROJECTS = [
   {
+    banner:"🍲",
+    bannerBg:"linear-gradient(135deg,#2e2430,#4a3a38)",
+    title:"Kitchi — Waste Less, Taste Best",
+    desc:"Multi-page Next.js app that helps people cook with what they already have. Tracks ingredient expiry, suggests meals by cuisine preference, builds grocery lists from eating habits, and logs weekly grocery and eating-out spend—with a sticker-style mascot brand and 3D holographic week-folder cards.",
+    tags:[["In Progress","tp"],["Next.js","tc"],["TypeScript","ti"],["Tailwind","tv"],["Framer Motion","tg"],["Zustand","ty"]],
+    links:[{ label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/Kitchi" }],
+  },
+  {
+    banner:"🖐️",
+    bannerBg:"linear-gradient(135deg,#243038,#3a4a5c)",
+    title:"Gestura — Hands-Free Computer Control",
+    desc:"Browser app that tracks your hand via webcam and maps gestures to actions—swipe for slides, finger cues for music, pinch for volume—plus a custom gesture library for accessibility. MediaPipe hand tracking runs fully on-device; no video leaves your computer.",
+    tags:[["In Progress","tp"],["React","tc"],["TypeScript","ti"],["Vite","ty"],["MediaPipe","tg"],["Tailwind","tv"],["Zustand","ty"]],
+    links:[
+      // TODO: add Gestura live link when deployed
+      { label:"⭐ GitHub", cls:"pl-gh", href:"https://github.com/SuShoonLei/Gestura" },
+    ],
+  },
+  {
     banner:"🎭",
     bannerBg:"linear-gradient(135deg,#2a2438,#3d4a5c)",
     title:"Camrades",
