@@ -21,7 +21,7 @@ export default function NowPage() {
               GitHub ↗
             </SpiralHoverAnchor>
             <br />
-            <span className="prompt">→ </span>🎭&nbsp; Building <strong style={{ color: "var(--purple)" }}>Camrades</strong> — multiplayer AI-judged charades (CLIP in the browser).{" "}
+            {/* <span className="prompt">→ </span>🎭&nbsp; Building <strong style={{ color: "var(--purple)" }}>Camrades</strong> — multiplayer AI-judged charades (CLIP in the browser).{" "}
             <SpiralHoverAnchor href="https://github.com/SuShoonLei/Camrades" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
               GitHub ↗
             </SpiralHoverAnchor>
@@ -30,7 +30,7 @@ export default function NowPage() {
             <SpiralHoverAnchor href="https://github.com/Min1322003/GroupGame" target="_blank" rel="noreferrer" className="now-terminal-link" canvasW={200} canvasH={40} starCount={240}>
               GitHub ↗
             </SpiralHoverAnchor>
-            <br />
+            <br /> */}
             <span className="prompt">→ </span>🔐&nbsp; Learning cybersecurity fundamentals<br />
             <span className="prompt">→ </span>🎓&nbsp; Finishing strong — graduating Dec 2026<br />
             <span className="prompt">→ </span>🌏&nbsp; Dreaming up the next travel destination ✈️
