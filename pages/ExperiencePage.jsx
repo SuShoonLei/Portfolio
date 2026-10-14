@@ -10,7 +10,7 @@ export default function ExperiencePage() {
       <div className="timeline">
         <div className="timeline-item">
           <div className="tl-date">June 2026 — Present · Leadership · On-campus</div>
-          <div className="tl-role">Vice President — Founder</div>
+          <div className="tl-role">Vice President</div>
           <div className="tl-org">Women In Computing [WiC] · SUNY Oswego</div>
           <p className="tl-desc">
             Lead and grow a student organization that promotes the participation and success of women in computing and technology-related fields through workshops, networking, and community building.
